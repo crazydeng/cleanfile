@@ -14,7 +14,14 @@ func main() {
 		if info.IsDir() {
 			return nil
 		}
-		_path := fmt.Sprintf("%s, size:%d", path, info.Size())
+
+		size := fmt.Sprintf("%d BYTES", info.Size())
+		mb := float64(info.Size()) / (1024.0 * 1024)
+		if mb > 1.0 {
+			// lager than 1mb
+			size = fmt.Sprintf("%0.2f MB", mb)
+		}
+		_path := fmt.Sprintf("%s, size:%s", path, size)
 		files = append(files, _path)
 		return nil
 	})
