@@ -7,9 +7,17 @@ import (
 )
 
 func main() {
+
+	args := os.Args
+	argNum := len(args)
+	if argNum != 2 {
+		fmt.Println("missing file path")
+		os.Exit(1)
+	}
+
 	var files []string
 
-	root := "/root/go_project/src/github.com/crazydeng"
+	root := args[1]
 	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
